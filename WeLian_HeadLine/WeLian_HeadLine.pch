@@ -1,0 +1,33 @@
+//
+//  WeLian_HeadLine.pch
+//  WeLian_HeadLine
+//
+//  Created by weLian on 15/6/6.
+//  Copyright (c) 2015年 杭州传送门网络科技有限公司. All rights reserved.
+//
+
+#ifndef WeLian_HeadLine_WeLian_HeadLine_pch
+#define WeLian_HeadLine_WeLian_HeadLine_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
+
+#import "Utils.h"
+#import "External.h"
+#import "Models.h"
+
+#endif
