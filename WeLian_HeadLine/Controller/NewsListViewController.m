@@ -53,7 +53,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     //tableview头部距离问题
     if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
         self.automaticallyAdjustsScrollViewInsets = NO;
@@ -66,8 +65,6 @@
     self.datasource = [TouTiaoInfo getAllTouTiaos];
     
     //添加创建活动按钮
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"创建活动" style:UIBarButtonItemStyleDone target:self action:@selector(createActivity)];
-    
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f,ViewCtrlTopBarHeight,self.view.width,self.view.height - ViewCtrlTopBarHeight)];
     tableView.backgroundColor = KBgLightGrayColor;
     tableView.dataSource = self;
@@ -120,24 +117,26 @@
     if (!cell) {
         cell = [[NewsListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    cell.infoData = _datasource[indexPath.row];
+    if (_datasource.count) {
+        cell.infoData = _datasource[indexPath.row];
+    }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    ITouTiaoModel *touTiao = _datasource[indexPath.row];
-    TOWebViewController *webVC = [[TOWebViewController alloc] initWithURLString:touTiao.url];
-    webVC.navigationButtonsHidden = NO;//隐藏底部操作栏目
-    webVC.showRightShareBtn = YES;//现实右上角分享按钮
-    webVC.isTouTiao = YES;
-    webVC.title = @"创业头条";
-//    webVC.showPageTitles = NO;//隐藏标题
-    [self.navigationController pushViewController:webVC animated:YES];
-    
-    //
-    [MobClick event:KUMTouTiaoLook label:touTiao.title];
+    if (self.datasource.count > 0) {
+        ITouTiaoModel *touTiao = self.datasource[indexPath.row];
+        TOWebViewController *webVC = [[TOWebViewController alloc] initWithURLString:touTiao.url];
+        webVC.navigationButtonsHidden = NO;//隐藏底部操作栏目
+        webVC.showRightShareBtn = YES;//现实右上角分享按钮
+        webVC.isTouTiao = YES;
+        webVC.shareImageUrl = touTiao.photo;
+        webVC.title = @"创业头条";
+        [self.navigationController pushViewController:webVC animated:YES];
+        [MobClick event:KUMTouTiaoLook label:touTiao.title];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -172,15 +171,9 @@
                                          //隐性删除数据库数据
                                          [TouTiaoInfo deleteAllTouTiaoInfos];
                                      }
-                                     
                                      //异步保存数据到数据库
                                      if ([resultInfo count] > 0) {
                                          [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-//                                             NSPredicate *pre = [NSPredicate predicateWithFormat:@"%K == %@", @"isNow",@(YES)];
-//                                             LogInUser *loginUser = [LogInUser MR_findFirstWithPredicate:pre inContext:localContext];
-//                                             if (!loginUser) {
-//                                                 return;
-//                                             }
                                              for (ITouTiaoModel *iTouTiaoModel in resultInfo) {
                                                  NSPredicate *pre = [NSPredicate predicateWithFormat:@"%K == %@", @"touTiaoId",iTouTiaoModel.touTiaoId];
                                                  TouTiaoInfo *touTiaoInfo = [TouTiaoInfo MR_findFirstWithPredicate:pre inContext:localContext];
@@ -195,8 +188,6 @@
                                                  touTiaoInfo.title = iTouTiaoModel.title;
                                                  touTiaoInfo.url = iTouTiaoModel.url;
                                                  touTiaoInfo.isShow = @(YES);
-                                                 
-//                                                 [loginUser addRsTouTiaoInfosObject:touTiaoInfo];
                                              }
                                          } completion:^(BOOL contextDidSave, NSError *error) {
                                              [self updateDataAndUIWithResultInfo:resultInfo];
@@ -204,28 +195,6 @@
                                      }else{
                                          [self updateDataAndUIWithResultInfo:resultInfo];
                                      }
-                                     
-//                                     for (ITouTiaoModel *iTouTiaoModel in resultInfo) {
-//                                         [TouTiaoInfo createTouTiaoInfoWith:iTouTiaoModel];
-//                                     }
-//                                     
-//                                     self.datasource = [TouTiaoInfo getAllTouTiaos];
-//                                     [_tableView reloadData];
-//                                     
-//                                     //是否显示上拉加载更多
-//                                     if ([resultInfo count] == _pageSize) {
-//                                         _tableView.footer.hidden = NO;
-//                                     }else{
-//                                         _tableView.footer.hidden = YES;
-//                                     }
-//                                     
-//                                     //提醒信息显示
-//                                     if(_datasource.count == 0){
-//                                         [_tableView addSubview:self.notView];
-//                                         [_tableView sendSubviewToBack:self.notView];
-//                                     }else{
-//                                         [_notView removeFromSuperview];
-//                                     }
                                  } Failed:^(NSError *error) {
                                      [_tableView.header endRefreshing];
                                      [_tableView.footer endRefreshing];

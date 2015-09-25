@@ -53,7 +53,7 @@
     [self umengTrack];
     
     // [2]:注册APNS
-    [self registerRemoteNotification];
+//    [self registerRemoteNotification];
     // 添加微信分享
     [[ShareEngine sharedShareEngine] registerApp];
     
@@ -135,21 +135,11 @@
 //注册用户通知设置
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
 {
-    //register to receive notifications
     [application registerForRemoteNotifications];
 }
 
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-//    NSString *token = [[[[deviceToken description]
-//                         stringByReplacingOccurrencesOfString:@"<" withString:@""]
-//                        stringByReplacingOccurrencesOfString:@">" withString:@""]
-//                       stringByReplacingOccurrencesOfString:@" " withString:@""];
-//    
-//    [[NSUserDefaults standardUserDefaults] setObject:token forKey:kDeviceToken];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
-//    
-//    [[RCIMClient sharedRCIMClient] setDeviceToken:token];
 }
 
 - (void)onlineConfigCallBack:(NSNotification *)note {
@@ -160,9 +150,6 @@
 
 -(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
-    //震动
-//    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-//    AudioServicesPlaySystemSound(1007);
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
@@ -198,55 +185,13 @@
         return  [WXApi handleOpenURL:url delegate:self];
     }
     return YES;
-//    return [ShareSDK handleOpenURL:url wxDelegate:self];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    //跳转支付宝钱包进行支付，需要将支付宝钱包的支付结果回传给SDK
-//    if ([url.host isEqualToString:@"safepay"]) {
-//        [[AlipaySDK defaultService]
-//         processOrderWithPaymentResult:url
-//         standbyCallback:^(NSDictionary *resultDic) {
-//             NSInteger resultStatus = [resultDic[@"resultStatus"] integerValue];
-//             if (resultStatus == 9000) {
-//                 //支付成功
-//                 [KNSNotification postNotificationName:kAlipayPaySuccess object:nil];
-//             }else{
-//                 if ([resultDic[@"memo"] length] > 0) {
-//                     [UIAlertView showWithTitle:@"系统提示" message:resultDic[@"memo"]];
-//                 }
-//             }
-//             DLog(@"支付结果 result = %@", resultDic);
-//         }];
-//        return YES;
-//    }
-    
-//    if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回 authCode
-//        [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
-//            NSInteger resultStatus = [resultDic[@"resultStatus"] integerValue];
-//            if (resultStatus == 9000) {
-//                //支付成功
-//                [KNSNotification postNotificationName:kAlipayPaySuccess object:nil];
-//            }else{
-//                if ([resultDic[@"memo"] length] > 0) {
-//                    [UIAlertView showWithTitle:@"系统提示" message:resultDic[@"memo"]];
-//                }
-//            }
-//            DLog(@"支付结果 result = %@", resultDic);
-//        }];
-//        return YES;
-//    }
-    // url登陆: wx5e4e9a58776baed3://oauth?code=0212878332e4f9e909d6ec2ec0ea802w&state=123
-    //    wx5e4e9a58776baed3://platformId=wechat
     if ([url.description rangeOfString:@"wechat"].length>0) {
         return  [WXApi handleOpenURL:url delegate:self];
     }
-    
-//    return [ShareSDK handleOpenURL:url
-//                 sourceApplication:sourceApplication
-//                        annotation:annotation
-//                        wxDelegate:self];
     return YES;
 }
 

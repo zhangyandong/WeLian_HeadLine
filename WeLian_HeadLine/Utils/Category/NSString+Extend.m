@@ -7,7 +7,7 @@
 //
 
 #import "NSString+Extend.h"
-#import "PinYin4Objc.h"
+//#import "PinYin4Objc.h"
 #import <CommonCrypto/CommonDigest.h>
 #import <sys/sysctl.h>
 
@@ -256,17 +256,17 @@
 }
 
 //汉字首字母转换
-- (NSString *)getHanziFirstString
-{
-    //格式类型
-    HanyuPinyinOutputFormat *outputFormat=[[HanyuPinyinOutputFormat alloc] init];
-    [outputFormat setToneType:ToneTypeWithoutTone];
-    [outputFormat setVCharType:VCharTypeWithV];
-    [outputFormat setCaseType:CaseTypeLowercase];
-
-    NSString *outputPinyin=[PinyinHelper toHanyuPinyinStringWithNSString:[self substringToIndex:1] withHanyuPinyinOutputFormat:outputFormat withNSString:@" "];
-    return [[NSString stringWithFormat:@"%c",[outputPinyin characterAtIndex:0]] uppercaseString];
-}
+//- (NSString *)getHanziFirstString
+//{
+//    //格式类型
+//    HanyuPinyinOutputFormat *outputFormat=[[HanyuPinyinOutputFormat alloc] init];
+//    [outputFormat setToneType:ToneTypeWithoutTone];
+//    [outputFormat setVCharType:VCharTypeWithV];
+//    [outputFormat setCaseType:CaseTypeLowercase];
+//
+//    NSString *outputPinyin=[PinyinHelper toHanyuPinyinStringWithNSString:[self substringToIndex:1] withHanyuPinyinOutputFormat:outputFormat withNSString:@" "];
+//    return [[NSString stringWithFormat:@"%c",[outputPinyin characterAtIndex:0]] uppercaseString];
+//}
 
 //获取时间戳
 + (NSString *)getNowTimestamp
@@ -319,56 +319,83 @@
     if ([platform isEqualToString:@"iPhone6,2"]) return @"iPhone5";
     if ([platform isEqualToString:@"iPhone7,1"]) return @"iPhone6Plus";
     if ([platform isEqualToString:@"iPhone7,2"]) return @"iPhone6";
-    
-//    if ([platform isEqualToString:@"iPhone1,1"]) return @"iPhone 2G (A1203)";
-//    if ([platform isEqualToString:@"iPhone1,2"]) return @"iPhone 3G (A1241/A1324)";
-//    if ([platform isEqualToString:@"iPhone2,1"]) return @"iPhone 3GS (A1303/A1325)";
-//    if ([platform isEqualToString:@"iPhone3,1"]) return @"iPhone 4 (A1332)";
-//    if ([platform isEqualToString:@"iPhone3,2"]) return @"iPhone 4 (A1332)";
-//    if ([platform isEqualToString:@"iPhone3,3"]) return @"iPhone 4 (A1349)";
-//    if ([platform isEqualToString:@"iPhone4,1"]) return @"iPhone 4S (A1387/A1431)";
-//    if ([platform isEqualToString:@"iPhone5,1"]) return @"iPhone 5 (A1428)";
-//    if ([platform isEqualToString:@"iPhone5,2"]) return @"iPhone 5 (A1429/A1442)";
-//    if ([platform isEqualToString:@"iPhone5,3"]) return @"iPhone 5c (A1456/A1532)";
-//    if ([platform isEqualToString:@"iPhone5,4"]) return @"iPhone 5c (A1507/A1516/A1526/A1529)";
-//    if ([platform isEqualToString:@"iPhone6,1"]) return @"iPhone 5s (A1453/A1533)";
-//    if ([platform isEqualToString:@"iPhone6,2"]) return @"iPhone 5s (A1457/A1518/A1528/A1530)";
-//    if ([platform isEqualToString:@"iPhone7,1"]) return @"iPhone 6 Plus (A1522/A1524)";
-//    if ([platform isEqualToString:@"iPhone7,2"]) return @"iPhone 6 (A1549/A1586)";
-    
-//    if ([platform isEqualToString:@"iPod1,1"])   return @"iPod Touch 1G (A1213)";
-//    if ([platform isEqualToString:@"iPod2,1"])   return @"iPod Touch 2G (A1288)";
-//    if ([platform isEqualToString:@"iPod3,1"])   return @"iPod Touch 3G (A1318)";
-//    if ([platform isEqualToString:@"iPod4,1"])   return @"iPod Touch 4G (A1367)";
-//    if ([platform isEqualToString:@"iPod5,1"])   return @"iPod Touch 5G (A1421/A1509)";
-//    
-//    if ([platform isEqualToString:@"iPad1,1"])   return @"iPad 1G (A1219/A1337)";
-//    
-//    if ([platform isEqualToString:@"iPad2,1"])   return @"iPad 2 (A1395)";
-//    if ([platform isEqualToString:@"iPad2,2"])   return @"iPad 2 (A1396)";
-//    if ([platform isEqualToString:@"iPad2,3"])   return @"iPad 2 (A1397)";
-//    if ([platform isEqualToString:@"iPad2,4"])   return @"iPad 2 (A1395+New Chip)";
-//    if ([platform isEqualToString:@"iPad2,5"])   return @"iPad Mini 1G (A1432)";
-//    if ([platform isEqualToString:@"iPad2,6"])   return @"iPad Mini 1G (A1454)";
-//    if ([platform isEqualToString:@"iPad2,7"])   return @"iPad Mini 1G (A1455)";
-//    
-//    if ([platform isEqualToString:@"iPad3,1"])   return @"iPad 3 (A1416)";
-//    if ([platform isEqualToString:@"iPad3,2"])   return @"iPad 3 (A1403)";
-//    if ([platform isEqualToString:@"iPad3,3"])   return @"iPad 3 (A1430)";
-//    if ([platform isEqualToString:@"iPad3,4"])   return @"iPad 4 (A1458)";
-//    if ([platform isEqualToString:@"iPad3,5"])   return @"iPad 4 (A1459)";
-//    if ([platform isEqualToString:@"iPad3,6"])   return @"iPad 4 (A1460)";
-//    
-//    if ([platform isEqualToString:@"iPad4,1"])   return @"iPad Air (A1474)";
-//    if ([platform isEqualToString:@"iPad4,2"])   return @"iPad Air (A1475)";
-//    if ([platform isEqualToString:@"iPad4,3"])   return @"iPad Air (A1476)";
-//    if ([platform isEqualToString:@"iPad4,4"])   return @"iPad Mini 2G (A1489)";
-//    if ([platform isEqualToString:@"iPad4,5"])   return @"iPad Mini 2G (A1490)";
-//    if ([platform isEqualToString:@"iPad4,6"])   return @"iPad Mini 2G (A1491)";
-    
-//    if ([platform isEqualToString:@"i386"])      return @"iPhone Simulator";
-//    if ([platform isEqualToString:@"x86_64"])    return @"iPhone Simulator";
     return platform;
+}
+
+/**
+ *  根据图片使用场景生成新的URL地址
+ *
+ *  @param imageScene 使用场景
+ *
+ *  @return 新的地址
+ */
+- (NSString *)imageUrlManageScene:(DownloadImageScene)imageScene condenseSize:(CGSize)condenseSize
+{
+    NSString *deleExestr = [self stringByDeletingPathExtension];
+    if ([deleExestr hasSuffix:@"_x"]) return self;
+    NSArray *array = [deleExestr componentsSeparatedByString:@"_"];
+    if (array.count<3) {
+        return self;
+    }
+    CGFloat originalWidth = [array[1] floatValue];
+    CGFloat originalHeight = [array[2] floatValue];
+    long long bytesStr = [[array lastObject] longLongValue];
+    CGFloat max = MAX(originalWidth, originalHeight);
+    if (max<300) return self;
+    
+    NSString *thumbType = @"w";
+    if (originalWidth > originalHeight) {
+        thumbType = @"h";
+    }
+    
+    switch (imageScene) {
+        case DownloadImageSceneAvatar:
+            return [self stringByAppendingFormat:@"@200w_1o.jpg"];
+            break;
+        case DownloadImageSceneThumbnail:
+        {
+            NSString *widthStr = [NSString stringWithFormat:@"%.0f",condenseSize.width*2];
+            //            NSString *heightStr = [NSString stringWithFormat:@"%.0f",condenseSize.height*4];
+            return [self stringByAppendingFormat:@"@80Q_%@%@_1o.jpg",widthStr, thumbType];
+        }
+            break;
+        case DownloadImageSceneTailor:
+        {
+            NSString *widthStr = [NSString stringWithFormat:@"%.0f",condenseSize.width*2];
+            NSString *heightStr = [NSString stringWithFormat:@"%.0f",condenseSize.height*2];
+            return [self stringByAppendingFormat:@"@%@x%@-5rc_2o.jpg",widthStr,heightStr];
+        }
+            break;
+        case DownloadImageSceneBig:
+        {
+            CGFloat byteM = bytesStr/1024.00f;
+            CGFloat min = MIN(originalHeight, originalWidth);
+            if (min<1000) {
+                CGFloat maxPixel = 20.0;
+                if (byteM<=1.0) {
+                    return self;
+                }else if (byteM>1&&byteM<=8){
+                    maxPixel = (10-byteM)*10;
+                }
+                return [self stringByAppendingFormat:@"@%.fQ_1o.jpg",maxPixel];
+            }
+            
+            NSString *oreStr = @"";
+            if (originalHeight > 3000 || originalWidth > 3000) {
+                if ([thumbType isEqualToString:@"w"]) {
+                    oreStr = @"_3000h";
+                }else{
+                    oreStr = @"_3000w";
+                }
+            }
+            return [self stringByAppendingFormat:@"@%@_1o.jpg",oreStr];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    return self;
 }
 
 @end

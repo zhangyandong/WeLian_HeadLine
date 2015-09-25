@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>39EDF008-5839-4E80-9A7E-2F1995422F40</string>
+	<key>IDESourceControlProjectName</key>
+	<string>WeLian_HeadLine</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>6DE420C8E3D09B621A54C543A308A4F7EF6DC259</key>
+		<string>http://github.com/zhangyandong/WeLian_HeadLine.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>WeLian_HeadLine.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>6DE420C8E3D09B621A54C543A308A4F7EF6DC259</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>http://github.com/zhangyandong/WeLian_HeadLine.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>6DE420C8E3D09B621A54C543A308A4F7EF6DC259</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6DE420C8E3D09B621A54C543A308A4F7EF6DC259</string>
+			<key>IDESourceControlWCCName</key>
+			<string>WeLian_HeadLine</string>
+		</dict>
+	</array>
+</dict>
+</plist>

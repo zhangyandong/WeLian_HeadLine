@@ -17,7 +17,7 @@
 #define WLHttpTestServer  @"http://test.welian.com:8091"
 //#define WLHttpServer @"http://test.welian.com:8080"
 //正式环境
-#define WLHttpServer @"http://sev.welian.com:80"
+#define WLHttpServer      @"http://sevnew.welian.com:80"
 
 //本地调试
 //#define WLHttpServer  @"http://192.168.1.122:80"

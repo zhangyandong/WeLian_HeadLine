@@ -14,7 +14,7 @@
 #define kDetailMarginEdge 10.f
 #define kBottomHeight 37.f
 #define kTimeLabelHeight 19.f
-#define kImageViewHeight [NSObject getHeightWithMaxWidth:maxWidth In4ScreWidth:260.f In4ScreeHeight:145.f]
+#define kImageViewHeight [NSObject getHeightWithMaxWidth:(ScreenWidth - 15.f * 4.f) In4ScreWidth:260.f In4ScreeHeight:145.f]
 
 @interface NewsListViewCell ()
 
@@ -45,7 +45,9 @@
     [super willChangeValueForKey:@"infoData"];
     _infoData = infoData;
     [super didChangeValueForKey:@"infoData"];
-    [_infoImageView sd_setImageWithURL:[NSURL URLWithString:_infoData.photo]
+    NSString *photoPath = [_infoData.photo imageUrlManageScene:DownloadImageSceneThumbnail
+                                                  condenseSize:CGSizeMake(ScreenWidth - kMarginLeft * 4.f, kImageViewHeight)];
+    [_infoImageView sd_setImageWithURL:[NSURL URLWithString:photoPath]
                       placeholderImage:nil
                                options:SDWebImageRetryFailed|SDWebImageLowPriority];
     _timeLabel.text = [_infoData displayCreateTime];

@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, DownloadImageScene) {
+    DownloadImageSceneThumbnail = 0,  // 缩略图
+    DownloadImageSceneTailor,         // 裁剪图
+    DownloadImageSceneBig,             // 大图
+    DownloadImageSceneAvatar          // 头像
+};
+
 @interface NSString (Extend)
 
 - (BOOL)isUrl;
@@ -36,7 +43,7 @@
 - (NSString *)deleteTopAndBottomKonggeAndHuiche;
 
 //汉字首字母转换
-- (NSString *)getHanziFirstString;
+//- (NSString *)getHanziFirstString;
 
 //获取时间戳
 + (NSString *)getNowTimestamp;
@@ -46,4 +53,13 @@
 
 //获得设备型号
 + (NSString *)getCurrentDeviceModel;
+
+/**
+ *  根据图片使用场景生成新的URL地址
+ *
+ *  @param imageScene 使用场景
+ *
+ *  @return 新的地址
+ */
+- (NSString *)imageUrlManageScene:(DownloadImageScene)imageScene condenseSize:(CGSize)condenseSize;
 @end
